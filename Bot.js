@@ -7,34 +7,34 @@ var WordService = require('./components/wordservice.js');
 var WeatherService = require('./components/weatherservice.js');
 
 var commands = {
-  'm!video': {
+  'n/video': {
     execute: getVideo,
     description: 'Получить видео с YouTube по поисковому слову'
   },
-  'm!weather': {
+  'n/weather': {
     execute: getWeather,
     description: 'Получить текущую погоду для данного города, по умолчанию Стокгольм'
   },
-  'm!roll': {
+  'n/roll': {
     execute: roll,
     description: 'Рулон от 1 до 100'
   },
-  'm!help': {
+  'n/help': {
     execute: showHelp
   },
-  'm!words': {
+  'n/words': {
     execute: countWordsByUser,
     description: 'Получить самые популярные слова для пользователя данного имени пользователя, по умолчанию используется ваше имя пользователя'
   },
-  'm!play': {
+  'n/play': {
     execute: doQueue,
     description: 'Сыграть свою песню'
   },
-  'm!skip': {
+  'n/skip': {
     execute: voteSkip,
     description: 'Пропустить текущую песню'
   },
-  'm!song': {
+  'n/song': {
     execute: showSong,
     description: 'Получить текущую песню'
   }
@@ -116,7 +116,7 @@ function showHelp(args, message) {
   if (Object.keys(commands).length > 1) {
     var toReturn = 'Доступные команды:\n';
     for (var command in commands) {
-      if (command != 'm!help') {
+      if (command != 'n/help') {
         data = commands[command];
         toReturn += command + ': ' + data.description + getAvailableCommandAsText(data) + '\n';
       }
@@ -187,10 +187,10 @@ function init() {
   Helper.keys('apikeys', ['discord']).then(keys => {
     Bot.login(keys.discord);
 
-    Queue = registerService(Queue, ['m!play', 'm!skip', 'm!song']);
-    TrackHelper = registerService(TrackHelper, ['m!play', 'm!video']);
-    WordService = registerService(WordService, ['m!words']);
-    WeatherService = registerService(WeatherService, ['m!weather']);
+    Queue = registerService(Queue, ['n/play', 'n/skip', 'n/song']);
+    TrackHelper = registerService(TrackHelper, ['n/play', 'n/video']);
+    WordService = registerService(WordService, ['n/words']);
+    WeatherService = registerService(WeatherService, ['n/weather']);
   }).catch(console.error);
 }
 
